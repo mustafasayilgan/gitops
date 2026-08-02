@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hepapi-prod
+  namespace: argocd
+spec:
+  project: prod
+  source:
+    repoURL: https://github.com/mustafasayilgan/gitops.git
+    targetRevision: HEAD
+    path: apps/prod
+  destination:
+    name: in-cluster
+    namespace: prod
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

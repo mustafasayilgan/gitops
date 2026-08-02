@@ -1,0 +1,34 @@
+appName: dev-hepapi
+
+image: mustafasayilgan/dev-hepapi:latest
+
+# scaled to 0 for now — structure stays, no running pods
+replicaCount: 0
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 200m
+    memory: 128Mi
+
+service:
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  host: dev.hepapi.test
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /api/items
+
+mongo:
+  name: mongo
+  image: mongo:7.0.37
+  port: 27017
+  database: hepapi
+  secretName: dev-hepapi-mongo
+  replicaCount: 0
+  persistence:
+    size: 1Gi

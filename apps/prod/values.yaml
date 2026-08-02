@@ -1,0 +1,32 @@
+appName: hepapi
+
+image: mustafasayilgan/hepapi:46323d0
+
+replicaCount: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 256Mi
+  limits:
+    cpu: 200m
+    memory: 512Mi
+
+service:
+  port: 8000
+
+ingress:
+  enabled: true
+  className: nginx
+  host: hepapi.test
+  annotations:
+    nginx.ingress.kubernetes.io/app-root: /api/items
+
+mongo:
+  name: mongo
+  image: mongo:7.0.37
+  port: 27017
+  database: hepapi
+  secretName: hepapi-mongo
+  persistence:
+    size: 2Gi
