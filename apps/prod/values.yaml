@@ -1,6 +1,6 @@
 appName: hepapi
 
-image: mustafasayilgan/hepapi:d0ee348
+image: mustafasayilgan/hepapi:bd0524a
 
 replicaCount: 1
 
